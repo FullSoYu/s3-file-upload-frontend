@@ -1,8 +1,21 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ArticleList from "../Components/ArticleList";
 
 const Home = () => {
+  const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
+  useEffect(() => {
+    const getData = async () => {
+      const data = await axios({
+        method: "GET",
+        url: "http://localhost:8089/article",
+      });
+      setArticles(data.data);
+    };
+    getData();
+  }, []);
   return (
     <div className="flex flex-col max-w-2xl m-auto">
       <button
@@ -13,24 +26,7 @@ const Home = () => {
       >
         글 작성
       </button>
-      <div className="overflow-x-auto flex justify-center mt-20 ">
-        <table className="max-w-2xl table table-compact w-full">
-          <thead>
-            <tr>
-              <th></th>
-              <th>제목</th>
-              <th>작성 일시</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>1</th>
-              <th>파일업로드 질문 있습니다.</th>
-              <td>2023.01.02 17:00:00</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <ArticleList articles={articles} />
     </div>
   );
 };
