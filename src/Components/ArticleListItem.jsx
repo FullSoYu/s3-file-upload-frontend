@@ -3,9 +3,6 @@ import { formatDate } from "../utils";
 
 const ArticleListItem = ({ article }) => {
   const { id, title, body, createDate, updateDate } = article;
-
-  console.log(article);
-
   return (
     <tr>
       <th>{id}</th>
