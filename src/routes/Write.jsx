@@ -1,12 +1,23 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Write = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
   return (
     <div className="flex flex-col max-w-2xl m-auto">
+      <button
+        className="btn btn-outline btn-info ml-auto mr-0 mt-4 w-24
+      "
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        메인으로
+      </button>
       <div className="mt-12">글작성 페이지 입니다.</div>
       <div className="form-control w-full mt-8">
         <label className="label">
@@ -39,8 +50,17 @@ const Write = () => {
       <button
         className="btn btn-outline btn-info ml-auto mr-0 mt-6 w-24"
         onClick={() => {
-          const sendData = () => {
-            axios({
+          if (title.length === 0 || title === null) {
+            alert("제목을 입력해주세요");
+            return;
+          }
+          if (body.length === 0 || body === null) {
+            alert("내용을 입력해주세요");
+            return;
+          }
+
+          const sendData = async () => {
+            const data = await axios({
               method: "POST",
               url: "http://localhost:8089/article",
               data: {
@@ -48,6 +68,14 @@ const Write = () => {
                 body,
               },
             });
+            setTitle("");
+            setBody("");
+            if (data.status === 200) {
+              alert("작성이 성공적으로 완료되었습니다.");
+              navigate("/");
+            } else {
+              alert("작성이 실패 했습니다.");
+            }
           };
           sendData();
         }}
