@@ -6,6 +6,7 @@ const Write = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const formData = new FormData();
 
   return (
     <div className="flex flex-col max-w-2xl m-auto">
@@ -66,14 +67,16 @@ const Write = () => {
             alert("내용을 입력해주세요");
             return;
           }
-
+          formData.append("title", title);
+          formData.append("body", body);
           const sendData = async () => {
             const data = await axios({
               method: "POST",
               url: "http://localhost:8089/article",
-              data: {
-                title,
-                body,
+              data: formData,
+              formData,
+              headers: {
+                "Content-Type": "multipart/form-data",
               },
             });
             setTitle("");
