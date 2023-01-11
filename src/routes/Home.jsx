@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <div className="flex flex-col max-w-2xl m-auto">
       <button
-        className="btn btn-outline btn-info ml-auto mr-0 mt-10"
+        className="btn btn-outline btn-info ml-auto mr-0 mt-10 "
         onClick={() => {
           navigate("/Write");
         }}
