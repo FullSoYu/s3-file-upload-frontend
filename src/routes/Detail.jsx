@@ -13,6 +13,7 @@ const Detail = () => {
         url: `http://localhost:8089/article/${id}`,
       });
       setArticle(data.data);
+      console.log(data);
     };
     getData();
   }, []);

@@ -47,6 +47,14 @@ const Write = () => {
           className="input input-bordered w-full h-96"
         />
       </div>
+      <input
+        type="file"
+        className="file-input file-input-bordered file-input-info w-96 mr-o ml-auto mt-4"
+        multiple
+        onChange={(e) => {
+          console.log(e.target.files);
+        }}
+      />
       <button
         className="btn btn-outline btn-info ml-auto mr-0 mt-6 w-24"
         onClick={() => {
