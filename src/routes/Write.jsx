@@ -54,6 +54,9 @@ const Write = () => {
         multiple
         onChange={(e) => {
           console.log(e.target.files);
+          for (let i = 0; i < e.target.files.length; i++) {
+            formData.append("files", e.target.files[i]);
+          }
         }}
       />
       <button
